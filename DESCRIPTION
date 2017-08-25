@@ -1,0 +1,11 @@
+Package: detectpme
+Type: Package
+Title: Detect Invalid Responses via Point of Minimum Error
+Version: 00.01.00
+Author: Dale S. Kim
+Maintainer: Dale S. Kim <dalekim25@ucla.edu>
+Description: Calculates the point of minimum error for infrequency scales.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
