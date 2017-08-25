@@ -24,6 +24,7 @@ pme <- function(x, p) {
 
   # Cutoff
   output <- as.numeric(names(which.min(cumulative.prop - cumulative.prob)))
+  names(output) <- "Point of Minimum Error"
 
   return(output)
 
