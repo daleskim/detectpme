@@ -3,7 +3,6 @@ Type: Package
 Title: Detect Invalid Responses via Point of Minimum Error
 Version: 0.04
 Author: Dale S. Kim
-Maintainer: Dale S. Kim
 Description: Calculates the point of minimum error for infrequency scales.
 License: GPL-3
 Encoding: UTF-8
