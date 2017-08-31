@@ -9,10 +9,11 @@ pme(x, p)
 \arguments{
 \item{x}{A matrix or data frame of binary responses to infrequency items.}
 
-\item{p}{A vector of probabilities of random responses to infrequency items.}
+\item{p}{A vector of probabilities of random responses being flagged by
+infrequency items.}
 }
 \value{
-A vector of length 1, indicating the point of minimum error.
+A list of class "pme" containing diagnostics and the cutoff point.
 }
 \description{
 Calculate Point of Minimum Error

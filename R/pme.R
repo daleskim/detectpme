@@ -1,12 +1,11 @@
 #' Calculate Point of Minimum Error
 #'
 #' @param x A matrix or data frame of binary responses to infrequency items.
-#' @param p A vector of probabilities of random responses to infrequency items.
+#' @param p A vector of probabilities of random responses being flagged by
+#' infrequency items.
 #'
-#' @return A vector of length 1, indicating the point of minimum error.
+#' @return A list of class "pme" containing diagnostics and the cutoff point.
 #' @export
-#'
-#' @examples
 
 pme <- function(x, p) {
 
@@ -15,16 +14,32 @@ pme <- function(x, p) {
 
   # Sum over rows, then create proportion table
   prop.data <- table(factor(apply(x, 1, sum), levels = 0:ncol(x)))/nrow(x)
-  cumulative.prop <- cumsum(rev(prop.data)) # Proportion of data removed at >= x
+
+  # Proportion of data removed at >= x
+  cumulative.prop <- rev(cumsum(rev(prop.data)))
 
   # Poisson Binomial Probabilities
   pois.prob <- poisson.binomial.pdf(p)
-  cumulative.prob <- cumsum(rev(pois.prob[, 2])) # Probability of eliminating RR
-  names(cumulative.prob) <- rev(pois.prob[, 1])
 
-  # Cutoff
-  output <- as.numeric(names(which.min(cumulative.prop - cumulative.prob)))
-  names(output) <- "Point of Minimum Error"
+  # Probability of eliminating RR
+  cumulative.prob <- rev(cumsum(rev(pois.prob[, 2])))
+  names(cumulative.prob) <- pois.prob[, 1]
+
+  # ROC Table
+  roc.table <- cbind(cumulative.prop, cumulative.prob)
+  colnames(roc.table) <- c(
+    "Proportion of Data Eliminated",
+    "Probability of Random Responder Eliminated"
+  )
+
+  # Cutoff - Euclidian Distance Method
+  distances <- sqrt(roc.table[, 1]^2 + (1 - roc.table[, 2])^2)
+  cutoff <- as.numeric(names(which.min(distances)))
+
+  # Output
+  output <- list(roc.table, cutoff)
+  names(output) <- c("Diagnostic Table", "Cutoff")
+  class(output) <- "pme"
 
   return(output)
 

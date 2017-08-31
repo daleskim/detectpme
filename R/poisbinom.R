@@ -6,6 +6,27 @@
 #' @export
 #'
 #' @examples
+#' # 1. I have three fair coins. What is the probability of the number of heads,
+#' #    when they are all flipped simultaneously?
+#'
+#' poisson.binomial.pdf(c(.5, .5, .5))
+#'
+#' #      Successes Probability
+#' # [1,]         0       0.125
+#' # [2,]         1       0.375
+#' # [3,]         2       0.375
+#' # [4,]         3       0.125
+#'
+#' # 2. I have two biased coins. The probability of heads is 0.2 and 0.4. What
+#' #    is the probability of the number of heads when they are all flipped
+#' #    simultaneously?
+#'
+#' poisson.binomial.pdf(c(0.2, 0.4))
+#'
+#' #      Successes Probability
+#' # [1,]         0        0.48
+#' # [2,]         1        0.44
+#' # [3,]         2        0.08
 
 poisson.binomial.pdf <- function(p) { # Input is a vector of probabilities
   # Input Checks:
