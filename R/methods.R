@@ -1,9 +1,11 @@
+#' @export
 print.pme <- function(pme.obj) {
 
   cat("Point of Minimum Error:", pme.obj[["Cutoff"]])
 
 }
 
+#' @export
 plot.pme <- function(pme.obj, main = "ROC Curve",
   xlab = "Proportion of Data Elminated",
   ylab = "Probability of Random Responder Eliminated",
